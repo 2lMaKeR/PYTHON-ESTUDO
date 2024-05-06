@@ -2,7 +2,7 @@ import os
 
 # - vars
 restaurantes=[ # - dicionários
-    {'nome':'Plaza','categoria':'japonesa','ativo':False},
+    {'nome':'Sakura','categoria':'japonesa','ativo':False},
     {'nome':'Pizza Suprema','categoria':'italiana','ativo':True},
     {'nome':'Gilbertos','categoria':'brasileira','ativo':False}
     ]
