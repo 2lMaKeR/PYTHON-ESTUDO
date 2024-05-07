@@ -1,3 +1,5 @@
+from modelos.avaliacao import Avaliacao
+
 class Restaurante: # - class sempre com letra maiúscula como Restaurante
     restaurantes=[]
 
@@ -5,6 +7,7 @@ class Restaurante: # - class sempre com letra maiúscula como Restaurante
         self._nome=nome.title()
         self._categoria=categoria.upper()
         self._ativo=False
+        self._avaliacao=[]
         Restaurante.restaurantes.append(self)
 
     def __str__(self):
@@ -12,9 +15,9 @@ class Restaurante: # - class sempre com letra maiúscula como Restaurante
     
     @classmethod
     def listar_restaurantes(cls):
-        print(f"{'Nome do restaurante'.ljust(20)}|{'Categoria'.ljust(20)}|{'Status'}")
+        print(f"{'Nome do restaurante'.ljust(20)}|{'Categoria'.ljust(20)}|{'Avaliação'.ljust(20)}|{'Status'}")
         for restaurante in cls.restaurantes:
-            print(f'{restaurante.nome.ljust(20)}|{restaurante.categoria.ljust(20)}|{restaurante.ativo}')
+            print(f'{restaurante._nome.ljust(20)}|{str(restaurante._categoria).ljust(20)}|{restaurante.media_avaliacoes}|{restaurante._ativo}')
 
     @property
     def ativo(self):
@@ -22,8 +25,22 @@ class Restaurante: # - class sempre com letra maiúscula como Restaurante
     
     def alternar_estado(self):
         self._ativo=not self._ativo
+    
+    def receber_avaliacao(self,cliente,nota):
+        avaliacao=Avaliacao(cliente,nota)
+        self._avaliacao.append(avaliacao)
 
+    @property
+    def media_avaliacoes(self):
+        if not self._avaliacao:
+            return 0
+        soma_das_notas=sum(avaliacao._nota for avaliacao in self._avaliacao)
+        quantidade_de_notas=len(self._avaliacao)
+        media=round(soma_das_notas/quantidade_de_notas,1)
+        return media
+''' DEBUG
 restaurante_plaza=Restaurante('plaza','Gourmet')
 restaurante_pizza=Restaurante('pizza suprema','Italiana')
 
 Restaurante.listar_restaurantes()
+'''
