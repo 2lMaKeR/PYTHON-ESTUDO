@@ -1,4 +1,5 @@
 from modelos.avaliacao import Avaliacao
+from modelos.cardapio.item_cardapio import ItemCardapio
 
 class Restaurante: # - class sempre com letra maiúscula como Restaurante
     restaurantes=[]
@@ -8,6 +9,7 @@ class Restaurante: # - class sempre com letra maiúscula como Restaurante
         self._categoria=categoria.upper()
         self._ativo=False
         self._avaliacao=[]
+        self._cardapio=[]
         Restaurante.restaurantes.append(self)
 
     def __str__(self):
@@ -39,9 +41,19 @@ class Restaurante: # - class sempre com letra maiúscula como Restaurante
         quantidade_de_notas=len(self._avaliacao)
         media=round(soma_das_notas/quantidade_de_notas,1)
         return media
-''' DEBUG
-restaurante_plaza=Restaurante('plaza','Gourmet')
-restaurante_pizza=Restaurante('pizza suprema','Italiana')
+    
+    def adicionar_no_cardapio(self,item):
+        if isinstance(item,ItemCardapio):
+            self._cardapio.append(item)
 
-Restaurante.listar_restaurantes()
-'''
+    @property
+    def exibir_cardapio(self):
+        pr2=f'Cardapio do restaurante {self._nome}\n'
+        print(pr2)
+        for i,item in enumerate(self._cardapio,start=1):
+            if hasattr(item,'descricao'):
+                mensagem_prato=f'{i}. Nome: {item._nome} | Preço: R${item._preco} | Descrição: {item.descricao}'
+                print(mensagem_prato)
+            else:
+                mensagem_bebida=f'{i}. Nome: {item._nome} | Preço: R${item._preco} | Tamanho: {item.tamanho}'
+                print(mensagem_bebida)
