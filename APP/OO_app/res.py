@@ -7,8 +7,10 @@ restaurante_mexicano=Restaurante('Arriba','Mexicano')
 restaurante_japones=Restaurante('JapaCama','Japonesa')
 
 bebida_moscow_mule=Bebida('Moscow Mule',25,'Pequeno')
+bebida_moscow_mule.aplicar_desconto()
 
 prato_coxinha=Prato('Coxinha',7,'O Melhor petisco do mundo')
+prato_coxinha.aplicar_desconto()
 
 restaurante_plaza.adicionar_no_cardapio(bebida_moscow_mule)
 restaurante_plaza.adicionar_no_cardapio(prato_coxinha)
